@@ -1,5 +1,3 @@
-import java.util.Map;
-
-public record Moneda(String result,
-                     Map<String, Double> conversion_rates) {
+public record Moneda(String base_code, String target_code, Double conversion_rate) {
 }
+
