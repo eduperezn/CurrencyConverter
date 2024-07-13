@@ -6,21 +6,22 @@ import java.net.http.HttpResponse;
 
 public class ConsultaMoneda {
 
-    public Moneda consultaMoneda(String ConversionRate){
-        URI direccion = URI.create("https://v6.exchangerate-api.com/v6/171b045082952926dbd2c387/latest/"+ConversionRate);
+    public Moneda consultaMoneda(String base_code){
+        URI direction = URI.create("https://v6.exchangerate-api.com/v6/171b045082952926dbd2c387/latest/"+base_code);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(direccion)
+                .uri(direction)
                 .build();
-        try {
+
+        try{
             HttpResponse<String> response = null;
             response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
-            return new Gson().fromJson(response.body(), Moneda.class);
 
-        } catch (Exception e) {
-            throw new RuntimeException("No encontré esa moneda");
+            return new Gson().fromJson(response.body(), Moneda.class);
+        }catch (Exception e){
+            throw new RuntimeException("No encontre esa moneda");
         }
     }
 
